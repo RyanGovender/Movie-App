@@ -17,7 +17,7 @@ export interface IMovie{
     Poster: string;
     Ratings: Ratings;
     Metascore: string;
-    imdbrating: string;
+    imdbRating: string;
     imdbVotes: string;
     imdbid: string;
     Type: string;
