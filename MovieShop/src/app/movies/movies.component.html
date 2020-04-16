@@ -21,7 +21,7 @@
     <img src={{movie.Poster}} style="min-height: 200px!important;"  class="card-img-top" alt="..." >
     <div class="card-body">
       <a routerLink="/detail/{{movie.title}}">
-        <h5 class="movie-thumbnail__title overflow">{{movie.Title}}</h5>
+        <h5 class="movie-thumbnail__title overflow" data-toggle="tooltip" data-placement="bottom" title={{movie.Title}}>{{movie.Title}}</h5>
       </a>
       <p class="card-text text-white">R 50</p>
       <a type="button" data-toggle="modal" data-target="#exampleModal"class="btn btn-primary text-white" style="width: 100%;background-color: transparent;border-radius: 10px;">Book</a>
@@ -59,6 +59,11 @@
 <script>
   $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
+})
+</script>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
 })
 </script>
 
