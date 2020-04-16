@@ -1,0 +1,25 @@
+
+
+<div class="col-md-12">
+  <div class="card text-white"  style="background-color: transparent;" >
+    <div class="card-title">
+      <h3>My Cart</h3>
+    </div>
+    <div *ngFor="let itemx of item" >
+      <div class="media border mt-2 p-2">
+          <div class="media-body">
+            <h4>{{itemx.title}} <small><i>R {{itemx.totalCost}}</i></small></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: red;" (click)="removeItem(itemx);">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <p>Number of Tickets : {{itemx.quantity}}</p>
+            <p>Cost of Ticket : R{{itemx.itemCost}}</p>
+            <!-- <button type="button" (click)="removeItem(itemx);" class="btn btn-danger" style="background-color: transparent;border-radius: 10px;margin-left: 70%;">Remove</button> -->
+          </div>
+        </div>
+  </div>
+  <p>R {{total}}</p>
+  <button type="button" (click)="clearCart();" class="btn btn-primary">Clear Cart</button>
+  </div>
+</div>
+

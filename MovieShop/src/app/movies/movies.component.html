@@ -1,0 +1,89 @@
+
+
+
+<div class="row">
+  <div class="col-md-12" >
+      <input type="text" [formControl]="filter"  placeholder="Search for a movie"
+      style="background-color: #212326 !important; color: gray !important; border: none !important; margin-top: 30px; height: 80px; border-radius: 3px; display: block;
+      margin-left: auto;
+      margin-right: auto; text-align:left; font-size: 2.233em; width: 870px; padding-left: 15px; font-family: Montserrat,sans-serif;"/> 
+        <h1 class="text-white mt-3" style="text-align: center!important;">Now Showing </h1>
+<div class="row">
+<!-- <div *ngFor="let movie of filteredMovies$ | async" 
+[class.selected]="movie === selectedMovie"
+(click)="onSelect(movie)">
+<div class="col-md-12">
+  <div class="card mt-2" style="max-width: 8rem;background-color: transparent;border-color: transparent;">
+    <img src={{movie.url}}  class="card-img-top" alt="...">
+    <div class="card-body">
+      <a routerLink="/detail/{{movie.title}}">
+        <h5 class="movie-thumbnail__title">{{movie.title}}</h5>
+      </a>
+      <p class="card-text text-white">R {{movie.price }}</p>
+      <a type="button" data-toggle="modal" data-target="#exampleModal"class="btn btn-primary text-white" style="width: 100%;background-color: transparent;border-radius: 10px;">Book</a>
+    </div>
+  </div>
+</div>
+</div> -->
+
+<!-- <app-movie-search></app-movie-search> -->
+
+
+<div *ngFor="let movie of brews" 
+[class.selected]="movie === selectedMovie"
+(click)="onSelect(movie)">
+<div class="col-md-12">
+  <div class="card mt-2" style="max-width: 8rem;background-color: transparent;border-color: transparent;">
+    <img src={{movie.Poster}} style="min-height: 200px!important;"  class="card-img-top" alt="..." >
+    <div class="card-body">
+      <a routerLink="/detail/{{movie.title}}">
+        <h5 class="movie-thumbnail__title overflow">{{movie.Title}}</h5>
+      </a>
+      <p class="card-text text-white">R 50</p>
+      <a type="button" data-toggle="modal" data-target="#exampleModal"class="btn btn-primary text-white" style="width: 100%;background-color: transparent;border-radius: 10px;">Book</a>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+  </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to book tickers for {{selectedMovie.Title}} ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label > Number of Tickets : 
+          <input type="text" #numberTickets id="numberTickets" value="1" min="1" max="15"/>
+        </label>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="addToCart(selectedMovie,numberTickets.value); numberTickets.value='1'"  class="btn btn-primary" data-dismiss="modal" >Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+</script>
+
+
+ 
+    
+ 

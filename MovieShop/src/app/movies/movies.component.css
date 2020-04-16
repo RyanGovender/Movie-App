@@ -1,0 +1,14 @@
+.movie-thumbnail__title {
+    margin: 0;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.overflow{
+    white-space: nowrap!important; 
+    width: 100px!important;
+   overflow: hidden!important;
+   text-overflow: ellipsis!important; 
+}

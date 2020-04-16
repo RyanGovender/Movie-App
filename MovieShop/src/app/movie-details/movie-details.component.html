@@ -1,0 +1,29 @@
+
+
+<ul class="mt-5" style="margin-top: 10%!important;">
+    <li  *ngIf="movie2">
+      <div class="card mb-3 text-white" style="max-width: 750px;background-color: transparent;margin-left: 20%;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{movie2.Poster}}" class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{movie2.Title}}</h5>
+              <p class="card-text">
+                  {{movie2.Year}}
+                  <br>
+                  {{movie2.Plot}}
+                 <br>
+                  Awards : {{movie2.Awards}}
+                  <br>
+              </p>
+                </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+
+
