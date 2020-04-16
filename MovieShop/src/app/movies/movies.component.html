@@ -1,34 +1,18 @@
 
-
-
 <div class="row">
   <div class="col-md-12" >
-      <input type="text" [formControl]="filter"  placeholder="Search for a movie"
+    <div class="search">
+      <input #searchBox type="text" name="searchBox" class="search"  (keyup)="searchMovie(searchBox.value)" placeholder="Search for a movie"
       style="background-color: #212326 !important; color: gray !important; border: none !important; margin-top: 30px; height: 80px; border-radius: 3px; display: block;
-      margin-left: auto;
-      margin-right: auto; text-align:left; font-size: 2.233em; width: 870px; padding-left: 15px; font-family: Montserrat,sans-serif;"/> 
-        <h1 class="text-white mt-3" style="text-align: center!important;">Now Showing </h1>
-<div class="row">
-<!-- <div *ngFor="let movie of filteredMovies$ | async" 
-[class.selected]="movie === selectedMovie"
-(click)="onSelect(movie)">
-<div class="col-md-12">
-  <div class="card mt-2" style="max-width: 8rem;background-color: transparent;border-color: transparent;">
-    <img src={{movie.url}}  class="card-img-top" alt="...">
-    <div class="card-body">
-      <a routerLink="/detail/{{movie.title}}">
-        <h5 class="movie-thumbnail__title">{{movie.title}}</h5>
-      </a>
-      <p class="card-text text-white">R {{movie.price }}</p>
-      <a type="button" data-toggle="modal" data-target="#exampleModal"class="btn btn-primary text-white" style="width: 100%;background-color: transparent;border-radius: 10px;">Book</a>
+     text-align:left; font-size: 2.233em; padding-left: 15px; font-family: Montserrat,sans-serif;align-content: center;"/> 
     </div>
-  </div>
-</div>
-</div> -->
+      
+        <h1 *ngIf="count>0" class="text-white mt-3" style="text-align: center!important;">Now Showing </h1>
 
-<!-- <app-movie-search></app-movie-search> -->
-
-
+        <div *ngIf="count==0">
+          <h1 class="text-white mt-3" style="text-align: center!important;">No Results For {{searchBox.value}} </h1>
+        </div>
+<div class="row cardsMove">
 <div *ngFor="let movie of brews" 
 [class.selected]="movie === selectedMovie"
 (click)="onSelect(movie)">
@@ -45,11 +29,6 @@
   </div>
 </div>
 </div>
-
-
-
-
-
   </div>
   </div>
 </div>

@@ -13,16 +13,19 @@ export class CartComponent implements OnInit {
 
   item=[];
   total = 0;
+  count=0;
   constructor(private cartService:CartService) { }
 
   ngOnInit(): void {
     this.item = this.cartService.getItems();
     this.total = this.cartService.total;
+     this.numberOfItems();
   }
 
   ngAfterContentChecked()
   {
     this.total = this.cartService.total;
+    this.numberOfItems();
   }
 
   removeItem(item:any) : void {
@@ -32,6 +35,11 @@ export class CartComponent implements OnInit {
   clearCart():void{
  
     this.cartService.clearCart();
+  }
+
+  numberOfItems()
+  {
+     this.count = this.item.length;
   }
 
   

@@ -38,30 +38,44 @@ export class MoviesComponent implements OnInit {
   terms:Promise<any>;
   response:string[];
   brews:MultipleMovies[];
+  _flag = false;
+  searchBox:string;
+  _defaultSearch = 'batman';
+  count =0;
 
   constructor(private movieService:MoviesService,private cartService:CartService,
    ) {
        } 
 
-       Testmethod(){
-         return this.movieService.TestTry().subscribe((data:any)=>{
-         this.brews = data.Search ;
-        });
+      //  Testmethod(){
+      //    return this.movieService.TestTry().subscribe((data:any)=>{
+      //    this.brews = data.Search ;
+      //   });
 
-      } 
+      // } 
+
+      ngAfterContentChecked()
+      {
+       if(this._flag)
+       {
+      this.searchMovie(this.searchBox);
+      this._flag = false;
+      this.count = this.brews.length;
+       }
+      }
 
   ngOnInit(): void {
-    this.Testmethod();
+    this.searchMovie(undefined);
    
    // this.getMovies();
       //this.getMovies();
     //console.log(this.movies.length);
-    this.movies2$ = this.movieService.getAllMovies();
-    this.filter = new FormControl('');
-    this.filter$ = this.filter.valueChanges.pipe(startWith(''));
-    this.filteredMovies$ = combineLatest(this.movies2$, this.filter$).pipe(
-      map(([movies, filterString]) => movies.filter(movies => movies.Title.toLowerCase().indexOf(filterString.toLowerCase()) !== -1))
-    );
+    // this.movies2$ = this.movieService.getAllMovies();
+    // this.filter = new FormControl('');
+    // this.filter$ = this.filter.valueChanges.pipe(startWith(''));
+    // this.filteredMovies$ = combineLatest(this.movies2$, this.filter$).pipe(
+    //   map(([movies, filterString]) => movies.filter(movies => movies.Title.toLowerCase().indexOf(filterString.toLowerCase()) !== -1))
+    // );
   }
 
  
@@ -71,6 +85,24 @@ export class MoviesComponent implements OnInit {
       console.log('getMovieDetails:' + this.movies.length);
     },
     error => this.errorMessage = <any>error);
+  }
+
+  searchMovie(value)
+  {
+    this.searchBox = value;
+    this._flag = true;
+    this.searchBox==null || this.searchBox == undefined || this.searchBox ==''?
+    this.movieSearch(this._defaultSearch):
+    this.movieSearch(value);
+  }
+
+  private movieSearch(value)
+  {
+       this.count =0;
+       this.movieService.SeachAPIForMovieByTitle(value).pipe(debounceTime(300),distinctUntilChanged()).subscribe((data:any)=>{
+            this.brews = data.Search;
+            this.count = this.brews.length;
+       });
   }
 
   addToCart(movie:any,numberOfTickets:number):void{

@@ -65,6 +65,10 @@ getMovie(id:number):Observable<Movie>{
   return this.http.get<Movie>(url);
 }
 
+SeachAPIForMovieByTitle(value){
+  return this.http.get(`https://www.omdbapi.com/?s=${value}${this._param}${this._key}`);
+}
+
 searchMovies(term:string):Observable<MovieDb[]>{
   // if(!term.trim())
   // {

@@ -3,10 +3,10 @@
 <div class="col-md-12">
   <div class="card text-white"  style="background-color: transparent;" >
     <div class="card-title">
-      <h3>My Cart</h3>
+      <h3 style="text-align: center;">My Cart ({{count}})</h3>
     </div>
     <div *ngFor="let itemx of item" >
-      <div class="media border mt-2 p-2">
+      <div class="media border border-primary mt-2 p-2">
           <div class="media-body">
             <h4>{{itemx.title}} <small><i>R {{itemx.totalCost}}</i></small></h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: red;" (click)="removeItem(itemx);">
@@ -18,8 +18,16 @@
           </div>
         </div>
   </div>
-  <p>R {{total}}</p>
-  <button type="button" (click)="clearCart();" class="btn btn-primary">Clear Cart</button>
+  <!-- <p>R {{total}}</p> -->
+    <div *ngIf="count==0">
+      <div class="card text-white" style="background-color: transparent;border-color: transparent;">
+        <img class="card-img" src="https://image.flaticon.com/icons/svg/2611/2611147.svg" alt="" height="170">
+      </div>
+      <h5 style="text-align: center;color: grey;">Your Cart Is Empty</h5>
+    </div>
+    <button *ngIf="count > 0" type="button"  class="btn btn-success mt-2"><strong>Pay Now R{{total}}</strong></button>
+    <button *ngIf="count > 0" type="button" (click)="clearCart();" class="btn btn-primary mt-2"><strong>Clear Cart</strong></button>
+
   </div>
 </div>
 
