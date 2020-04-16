@@ -7,7 +7,7 @@ import {DashboardComponent} from '../app/dashboard/dashboard.component';
 
 const routes:Routes =[
   {path:'cart',component:CartComponent},
-  {path:'detail/:title',component:MovieDetailsComponent},
+  {path:'detail/:imdbID',component:MovieDetailsComponent},
   {path: 'dashboard', component:DashboardComponent},
   {path:'', redirectTo: '/dashboard', pathMatch: 'full'}
 ];

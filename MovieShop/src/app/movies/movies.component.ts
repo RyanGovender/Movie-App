@@ -60,7 +60,7 @@ export class MoviesComponent implements OnInit {
        {
       this.searchMovie(this.searchBox);
       this._flag = false;
-      this.count = this.brews.length;
+      this.brews!=undefined ? this.count = this.brews.length:this.count =0;
        }
       }
 
@@ -101,7 +101,7 @@ export class MoviesComponent implements OnInit {
        this.count =0;
        this.movieService.SeachAPIForMovieByTitle(value).pipe(debounceTime(300),distinctUntilChanged()).subscribe((data:any)=>{
             this.brews = data.Search;
-            this.count = this.brews.length;
+            this.brews!=undefined ? this.count = this.brews.length:this.count =0;
        });
   }
 

@@ -25,40 +25,17 @@ export class MovieDetailsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-
     this.get();
-    console.log(this.movie2+'.......................................');
-  //  this.getMovie2();
-  //   const title2 = this.route.snapshot.paramMap.get('title');
-  //  fetch(`http://www.omdbapi.com/?s=${title2}&apikey=bb401528`)
-  //  .then(response=>response.json())
-  //  .then(res=>this.movies=res.Search);  
-  }
-
-
- 
-  // getMovie():void{
-
-  //   console.log('Hello');
-  //   const id =+this.route.snapshot.paramMap.get('id');
-  //   this.movieService.getMovie(id).subscribe(movie=>this.movie = movie);
-   
-  // }
-  getMovie2():void{
-     const title = this.route.snapshot.paramMap.get('title');
-     //this.movieService.getMovieByTitle().subscribe(movie=>this.movie2=movie);
   }
 
   get():Boolean
   {
-    console.log('Useless Log');
-    var movieTitle ='Baby+Driver';
-    this.movieService.getMovieData(movieTitle).subscribe(movieData =>{
+    const title2 = this.route.snapshot.paramMap.get('imdbID');;
+    this.movieService.getMovieData(title2).subscribe(movieData =>{
       this.movie2 = movieData;
       console.log('getMovieDetails:' + this.movie2.Plot);
     },
     error => this.errorMessage = <any>error);
-    console.log(this.movie2.Language)
     return false;
   }
 

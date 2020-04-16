@@ -1,29 +1,47 @@
 
-
-<ul class="mt-5" style="margin-top: 10%!important;">
-    <li  *ngIf="movie2">
-      <div class="card mb-3 text-white" style="max-width: 750px;background-color: transparent;margin-left: 20%;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="{{movie2.Poster}}" class="card-img" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{movie2.Title}}</h5>
-              <p class="card-text">
-                  {{movie2.Year}}
+<div class="col-md-12">
+  <div class="row mt-5 mb-4" style="align-content: center;justify-content: center;display: flex;">
+    <div class="card" style="background-color: #282828;">
+      <div class="card-body">
+        <div *ngIf="movie2" class="card mb-3 text-white" style="max-width: 750px;background-color: transparent;border-color: transparent;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="{{movie2.Poster}}" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title " style="text-align: center;">{{movie2.Title}}  </h5>
+                <h6 class="card-title text-primary" style="text-align: center;">IMDB : {{movie2.imdbRating}}/10</h6>
+                <br>
+                <p class="card-text">
+                  <strong> Release Year :  </strong>  {{movie2.Year}}
                   <br>
-                  {{movie2.Plot}}
-                 <br>
-                  Awards : {{movie2.Awards}}
-                  <br>
-              </p>
-                </div>
+                   <strong>Genre : </strong> {{movie2.Genre}}
+                   <br>
+                   <strong>Runtime : </strong>{{movie2.Runtime}}
+                    <br>
+                    <br>
+                    {{movie2.Plot}}
+                   <br>
+                   <br>
+                    <strong>Awards :</strong> {{movie2.Awards}}
+                    <br>
+                    <br>
+                    <strong>Production : </strong> {{movie2.Production}}
+                </p>
+                  </div>
+            </div>
           </div>
         </div>
+     
       </div>
-    </li>
-  </ul>
+    </div>
+    
+  </div>
+</div>
+
+
+
 
 
 

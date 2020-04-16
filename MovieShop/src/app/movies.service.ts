@@ -33,10 +33,10 @@ export class MoviesService {
 
 
 
-    getMovieData(movieName): Observable<IMovie> {
+    getMovieData(id): Observable<IMovie> {
 
-      return this.http.get<IMovie>(this._siteURL + movieName 
-        + this._param + this._key).do(data => console.log('All: ' + JSON.stringify(data)));
+      return this.http.get<IMovie>('https://www.omdbapi.com/?i=' + id 
+        + this._param + this._key);
     }
     
    
