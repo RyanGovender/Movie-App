@@ -6,7 +6,7 @@
       <h3 style="text-align: center;">My Cart ({{count}})</h3>
     </div>
     <div *ngFor="let itemx of item" >
-      <div class="media border border-primary mt-2 p-2">
+      <div class="media border border-primary mt-2 p-2" >
           <div class="media-body">
             <h4>{{itemx.title}} <small><i>R {{itemx.totalCost}}</i></small></h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: red;" (click)="removeItem(itemx);">

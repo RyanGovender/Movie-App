@@ -42,17 +42,9 @@ export class MoviesComponent implements OnInit {
   searchBox:string;
   _defaultSearch = 'batman';
   count =0;
+  _currentSearch = undefined;
 
-  constructor(private movieService:MoviesService,private cartService:CartService,
-   ) {
-       } 
-
-      //  Testmethod(){
-      //    return this.movieService.TestTry().subscribe((data:any)=>{
-      //    this.brews = data.Search ;
-      //   });
-
-      // } 
+  constructor(private movieService:MoviesService,private cartService:CartService, ) {} 
 
       ngAfterContentChecked()
       {
@@ -65,26 +57,7 @@ export class MoviesComponent implements OnInit {
       }
 
   ngOnInit(): void {
-    this.searchMovie(undefined);
-   
-   // this.getMovies();
-      //this.getMovies();
-    //console.log(this.movies.length);
-    // this.movies2$ = this.movieService.getAllMovies();
-    // this.filter = new FormControl('');
-    // this.filter$ = this.filter.valueChanges.pipe(startWith(''));
-    // this.filteredMovies$ = combineLatest(this.movies2$, this.filter$).pipe(
-    //   map(([movies, filterString]) => movies.filter(movies => movies.Title.toLowerCase().indexOf(filterString.toLowerCase()) !== -1))
-    // );
-  }
-
- 
-  getMovies(){
-    this.movieService.getAllMovies().subscribe(movieData =>{
-      this.movies = movieData;
-      console.log('getMovieDetails:' + this.movies.length);
-    },
-    error => this.errorMessage = <any>error);
+    this.searchMovie(this._currentSearch);
   }
 
   searchMovie(value)
@@ -99,6 +72,7 @@ export class MoviesComponent implements OnInit {
   private movieSearch(value)
   {
        this.count =0;
+       this._currentSearch = value;
        this.movieService.SeachAPIForMovieByTitle(value).pipe(debounceTime(300),distinctUntilChanged()).subscribe((data:any)=>{
             this.brews = data.Search;
             this.brews!=undefined ? this.count = this.brews.length:this.count =0;
@@ -114,16 +88,4 @@ export class MoviesComponent implements OnInit {
   onSelect(hero: Movie): void { 
     this.selectedMovie = hero;
   }
-
-  getStuff(){
-    
-  this.terms = fetch(`https://www.omdbapi.com/?s=${'batman'}&apikey=bb401528`)
-   .then(response=>response.json())
-    .then(res=>this.movies=res.Search);
-
-    console.log("here "+ this.terms.then(response=>response));
-    
-  }
-
-
 }

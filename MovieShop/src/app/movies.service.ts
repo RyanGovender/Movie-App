@@ -32,72 +32,15 @@ export class MoviesService {
     private http: HttpClient) { }
 
 
-
-    getMovieData(id): Observable<IMovie> {
+ getMovieData(id): Observable<IMovie> {
 
       return this.http.get<IMovie>('https://www.omdbapi.com/?i=' + id 
         + this._param + this._key);
     }
     
-   
-
-    getAllMovies():Observable<MovieDb[]>{
-      var title= 'batman';
-       console.log(title);
-       return this.http.get<MovieDb[]>(`https://www.omdbapi.com/?s=${title}${this._param}${this._key}`)
-       .do(data => console.log('All: ' + JSON.stringify(data)));
-    }
-
-    TestTry(){
-      var title= 'batman';
-      return this.http.get(`https://www.omdbapi.com/?s=${title}${this._param}${this._key}`);
-    }
-
-    private moviesUrl = 'api/movies';  // URL to web api
-
-
-getMovies (): Observable<Movie[]> {
-  return this.http.get<Movie[]>(this.moviesUrl)
-}
-
-getMovie(id:number):Observable<Movie>{
-  const url= `${this.moviesUrl}/${id}`;
-  return this.http.get<Movie>(url);
-}
-
 SeachAPIForMovieByTitle(value){
   return this.http.get(`https://www.omdbapi.com/?s=${value}${this._param}${this._key}`);
 }
 
-searchMovies(term:string):Observable<MovieDb[]>{
-  // if(!term.trim())
-  // {
-  //   return of([]);
-  // }
-  console.log('fuck');
-  console.log(this.http.get<MovieDb[]>(`https://www.omdbapi.com/?s=${term}${this._param}${this._key}`));
-  return this.http.get<MovieDb[]>(`http://www.omdbapi.com/?s=${term}${this._param}${this._key}`);
-}
-
-
-getMovieByTitle():Observable<IMovie[]>{
-
-  var title = 'Baby+Driver';
-  const url = `https://www.omdbapi.com/?apikey=9ad5a19c&t=${title}`;
-  return this.http.get<IMovie[]>(url,this.httpOptions);
-  
-}
-
-getApi(title:string):Observable<IMovie[]>{
-
-
-    title ='Baby+Driver'; 
-    const url = `https://www.omdbapi.com/?t=${title}&apikey=9ad5a19c`;
-    const headers = new Headers();
-    headers.append('Content-Type','application/json');
-    headers.append('token','token');
-    let options = {headers:headers};
-    return this.http.get<IMovie[]>(url,this.httpOptions);//.pipe(map((response: any) => response.json()));
-}
 }
 
