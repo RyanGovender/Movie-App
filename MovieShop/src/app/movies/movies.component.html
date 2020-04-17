@@ -1,22 +1,23 @@
-
+<!-- (keyup)="searchMovie(searchBox.value)" -->
 <div class="row">
-  <div class="col-md-12" >
-    <div class="search">
-      <input #searchBox type="text" name="searchBox" class="search"  (keyup)="searchMovie(searchBox.value)" placeholder="Search for a movie"
+  <div class="col-md-12 searchBar" >
+    <div class="flex-container">
+      <input #searchBox type="text" name="searchBox" class="fill-width"   (keyup)="searchTerm$.next($event.target.value)" placeholder="Search for a movie"
       style="background-color: #212326 !important; color: gray !important; border: none !important; margin-top: 30px; height: 80px; border-radius: 3px; display: block;
-     text-align:left; font-size: 2.233em; padding-left: 15px; font-family: Montserrat,sans-serif;align-content: center;"/> 
+     text-align:left; font-size: 2em; padding-left: 15px; font-family: Montserrat,sans-serif;align-content: center;"/> 
     </div>
         <h1 *ngIf="count>0" class="text-white mt-3" style="text-align: center!important;">Now Showing </h1>
 
         <div *ngIf="count==0">
           <h1 class="text-white mt-3" style="text-align: center!important;">No Results For {{searchBox.value}} </h1>
         </div>
+      </div>
 
-<div class="row cardsMove" style="align-content: center; justify-content: center;display: flex;">
-<div *ngFor="let movie of brews" 
+<div *ngIf="results" class="row cardsMove" style="align-content: center; justify-content: center;display: flex;">
+<div *ngFor="let movie of results" 
 [class.selected]="movie === selectedMovie"
 (click)="onSelect(movie)">
-<div class="col-md-12">
+<div class="col-md-12 searchBar">
   <div class="card mt-2" style="max-width: 8rem;background-color: transparent;border-color: transparent;">
     <a routerLink="/detail/{{movie.imdbID}}">
       <img src={{movie.Poster}} style="min-height: 200px!important;"  class="card-img-top" alt="..." >
@@ -32,30 +33,33 @@
 </div>
 </div>
   </div>
-  </div>
+ 
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to book tickers for {{selectedMovie.Title}} ?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label > Number of Tickets : 
-          <input type="text" #numberTickets id="numberTickets" value="1" min="1" max="15"/>
-        </label>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" (click)="addToCart(selectedMovie,numberTickets.value); numberTickets.value='1'"  class="btn btn-primary" data-dismiss="modal" >Confirm Booking</button>
+<div class="col-md-12">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to book tickers for {{selectedMovie.Title}} ?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label > Number of Tickets : 
+            <input type="text" #numberTickets id="numberTickets" value="1" min="1" max="15"/>
+          </label>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" (click)="addToCart(selectedMovie,numberTickets.value); numberTickets.value='1'"  class="btn btn-primary" data-dismiss="modal" >Confirm Booking</button>
+        </div>
       </div>
     </div>
   </div>
+  
 </div>
 
 <script>

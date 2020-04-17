@@ -13,7 +13,7 @@
    text-overflow: ellipsis!important; 
 }
 
-.search{
+/* .search{
  width: 870px;
 }
 
@@ -47,7 +47,7 @@
     .search{
         max-width: 100%!important;
     }
-}
+} */
 /* 
 @media(max-width:448px)
 {
@@ -65,3 +65,17 @@
 .row{
     margin-right: 0px!important;
 }
+
+.flex-container {
+    display: -webkit-box;
+    /* display: flex; */
+  }
+  
+  .fill-width {
+    flex: 1;
+  }
+
+  .searchBar{
+    padding-right: 0px!important;
+    padding-left: 30px!important;
+  }

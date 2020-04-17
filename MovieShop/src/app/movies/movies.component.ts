@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import {MoviesService} from '../movies.service';
 import { Movie } from '../Movie';
 import { CartService } from '../cart.service';
 import {MovieDetailsComponent} from '../movie-details/movie-details.component';
 import { Title } from '@angular/platform-browser';
-import { Observable, Subject,of, combineLatest } from 'rxjs';
+import { Observable, Subject,of, combineLatest, BehaviorSubject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap, startWith, map
 } from 'rxjs/operators';
@@ -20,6 +20,8 @@ import { MultipleMovies } from '../MutipleMovies';
 export class MoviesComponent implements OnInit {
 
   @Input() 
+
+
   movies: MovieDb[];
   price = 50;
   selectedMovie:Movie ={
@@ -29,59 +31,57 @@ export class MoviesComponent implements OnInit {
     price:0,
     description:''
   };
-  
-  movies2$:Observable<MovieDb[]>;
-  filteredMovies$:Observable<MovieDb[]>;
-  filter: FormControl;
-  filter$:Observable<string>;
-  errorMessage:string;
-  terms:Promise<any>;
-  response:string[];
+
+
   brews:MultipleMovies[];
   _flag = false;
   searchBox:string;
   _defaultSearch = 'batman';
   count =0;
   _currentSearch = undefined;
+  search$:string;
 
-  constructor(private movieService:MoviesService,private cartService:CartService, ) {} 
+  results :Object;
+  _defaultTerm = new BehaviorSubject(this._defaultSearch);
+  searchTerm$ = new BehaviorSubject(this._defaultSearch);
 
-      ngAfterContentChecked()
-      {
-       if(this._flag)
-       {
-      this.searchMovie(this.searchBox);
-      this._flag = false;
-      this.brews!=undefined ? this.count = this.brews.length:this.count =0;
-       }
-      }
-
+  constructor(private movieService:MoviesService,private cartService:CartService, private cd:ChangeDetectorRef) {
+ 
+  } 
   ngOnInit(): void {
-    this.searchMovie(this._currentSearch);
+      //this.searchMovie(this.searchTerm$);
+        this.movieService.searchEntries(this.searchTerm$)
+        .subscribe((results:any) => {
+          this.results = results.Search;
+          this.count =0;
+          if(this.results!= undefined) this.count = Object.keys(this.results).length
+          this.searchBox = this.searchTerm$.getValue();
+        });
   }
 
   searchMovie(value)
   {
-    this.searchBox = value;
-    this._flag = true;
-    this.searchBox==null || this.searchBox == undefined || this.searchBox ==''?
-    this.movieSearch(this._defaultSearch):
-    this.movieSearch(value);
+      this.searchBox = value;
+      this.searchBox==null || !this._flag || this.searchBox ==''?
+      this.movieSearch(this._defaultSearch):
+      this.movieSearch(value);
+      this._flag = true;
   }
 
   private movieSearch(value)
   {
-       this.count =0;
-       this._currentSearch = value;
-       this.movieService.SeachAPIForMovieByTitle(value).pipe(debounceTime(300),distinctUntilChanged()).subscribe((data:any)=>{
-            this.brews = data.Search;
-            this.brews!=undefined ? this.count = this.brews.length:this.count =0;
-       });
+    if(value.length>=3)
+    {
+      this.count =0;
+      this._currentSearch = value;
+      this.movieService.searchEntries(value).pipe(debounceTime(500),distinctUntilChanged()).subscribe((data:any)=>{
+           this.brews = data.Search;
+           this.brews!=undefined ? this.count = this.brews.length:this.count =0;
+      });
+    }
   }
 
   addToCart(movie:any,numberOfTickets:number):void{
-    console.log(numberOfTickets);
-    console.log(movie.Title);
     this.cartService.addToCart(movie,numberOfTickets,50);
   }
 

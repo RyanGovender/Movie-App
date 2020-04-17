@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Movie} from './Movie';
-import { Observable,of} from "rxjs";
+import { Observable,of, BehaviorSubject} from "rxjs";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { IMovie } from './IMovie';
 import {MovieJson} from './MovieJson';
@@ -37,9 +37,18 @@ export class MoviesService {
       return this.http.get<IMovie>('https://www.omdbapi.com/?i=' + id 
         + this._param + this._key);
     }
+
+    searchEntries(terms:BehaviorSubject<string>)
+    {
+      return terms.pipe(debounceTime(500),distinctUntilChanged(),
+      switchMap(term => this.SeachAPIForMovieByTitle(terms.getValue())
+      ));
+    }
     
-SeachAPIForMovieByTitle(value){
-  return this.http.get(`https://www.omdbapi.com/?s=${value}${this._param}${this._key}`);
+SeachAPIForMovieByTitle(value:string){
+
+  if(value=='') value ='batman';
+  if(value.length >=3) return this.http.get(`https://www.omdbapi.com/?s=${value}${this._param}${this._key}`);
 }
 
 }
