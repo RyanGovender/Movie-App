@@ -37,7 +37,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     FormsModule,  
     ReactiveFormsModule, 
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled:  environment.production })
+    ServiceWorkerModule.register('/Movie-App/ngsw-worker.js', { enabled:  environment.production })
   
   ],
   providers: [],
