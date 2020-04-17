@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1587134826406,
+  "timestamp": 1587136332988,
   "index": "/Movie-App/index.html",
   "assetGroups": [
     {
@@ -10,7 +10,9 @@
       "urls": [
         "/Movie-App/favicon.ico",
         "/Movie-App/index.html",
+        "/Movie-App/main-es2015.48668255c71a2a8e6191.js",
         "/Movie-App/main-es2015.e2d34efb21cfc22d131b.js",
+        "/Movie-App/main-es5.48668255c71a2a8e6191.js",
         "/Movie-App/main-es5.e2d34efb21cfc22d131b.js",
         "/Movie-App/manifest.webmanifest",
         "/Movie-App/ngsw-worker.js",
@@ -59,8 +61,10 @@
     "/Movie-App/assets/img/play_prism_hlock_2x.png": "8a30a8a2492f64e8a41397ae3345b6e760e98edc",
     "/Movie-App/assets/img/sk-logo.webp": "3705d7e2f8024cc2ae8fa3dcb7636f853922d0bd",
     "/Movie-App/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/Movie-App/index.html": "ee2a3fe9e476bcb87ec568739277541f961559da",
+    "/Movie-App/index.html": "9208603a53518be1c4769f34848e44a598c53bf3",
+    "/Movie-App/main-es2015.48668255c71a2a8e6191.js": "f6f72e773309f2b1e474b9fc9edd85cf7d6984d1",
     "/Movie-App/main-es2015.e2d34efb21cfc22d131b.js": "6270d43cbd31d749c6715225486c6544431988c2",
+    "/Movie-App/main-es5.48668255c71a2a8e6191.js": "7a1ff8502df1fd9a7be0c1512793f086ca6badd6",
     "/Movie-App/main-es5.e2d34efb21cfc22d131b.js": "2aaf2b5fe3609aa6bc1dcd43ce0166d549a939b7",
     "/Movie-App/manifest.webmanifest": "9b0c1e96155da991c89bb5249a265c034a2bcdab",
     "/Movie-App/ngsw-worker.js": "6670478ee6c59ce3db30f9719d926f178b3c1141",
